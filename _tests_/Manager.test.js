@@ -2,7 +2,7 @@ const Manager = require('../src/Manager');
 
 describe('Manager', () => {
     describe('Initialization', () => {
-        it('Should create an object with a name, id, email, and attached', () => {
+        it('Should create an object with a name, id, email, and office number', () => {
             const manager = new Manager('Jake', '3242', 'fake@email.com', '7')
     
             expect(manager.name).toEqual('Jake');
