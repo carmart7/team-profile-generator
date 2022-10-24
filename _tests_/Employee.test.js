@@ -27,7 +27,7 @@ describe('Employee', () => {
         });
     });
 
-    describe('get name', () => {
+    describe('get email', () => {
         it('Should return employee email', () => {
             const employee = new Employee('Jake', '3242', 'fake@email.com')
     
@@ -35,11 +35,11 @@ describe('Employee', () => {
         });
     });
 
-    describe('get name', () => {
+    describe('get role', () => {
         it('Should return employee role', () => {
             const employee = new Employee('Jake', '3242', 'fake@email.com')
     
             expect(employee.getRole()).toEqual('Employee');
         });
     });
-})
+});
