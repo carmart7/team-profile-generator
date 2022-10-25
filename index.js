@@ -55,6 +55,10 @@ const repeatQuestion = [
 ]
 
 function writeTeamPage(team) {
+    let employeeCards = ''
+    for (const employee of team) {
+        employeeCards += createEmployeeCard(employee);
+    }
     let fileText =
 `<!DOCTYPE html>
 <html lang="en">
@@ -70,53 +74,12 @@ function writeTeamPage(team) {
     <h1 class="text-center bg-danger text-white py-5 mb-5">My Team</h1>
     <div class="container">
         <div class="row mx-3 gx-3">
-
-            <div class="col-md-6 col-lg-4 px-3">
-                <div class="card mb-3 shadow">
-                    <div class="card-header bg-primary text-white">
-                    <h2>Name</h2>
-                    <h3><i class="fa-solid fa-mug-hot"></i> Manager</h3>
-                    </div>
-                    <div class="card-body bg-light py-3">
-                        <p class="bg-body border p-2 mb-0">ID: enter ID</p>
-                        <p class="bg-body border border-top-0 border-bottom-0 p-2 mb-0">Email: <a href="mailto:fake@email.com">fake@email.com</a></p>
-                        <p class="bg-body border p-2 my-0">Office number: 1</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-4 px-3">
-                <div class="card mb-3 shadow">
-                    <div class="card-header bg-primary text-white">
-                    <h2>Name</h2>
-                    <h3><i class="fa-solid fa-glasses"></i> Engineer</h3>
-                    </div>
-                    <div class="card-body bg-light py-3">
-                        <p class="bg-body border p-2 mb-0">ID: enter ID</p>
-                        <p class="bg-body border border-top-0 border-bottom-0 p-2 mb-0">Email: <a href="mailto:fake@email.com">fake@email.com</a></p>
-                        <p class="bg-body border p-2 my-0">Github: <a href="https://github.com/carmart7">carmart7</a></p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-4 px-3">
-                <div class="card mb-3 shadow">
-                    <div class="card-header bg-primary text-white">
-                    <h2>Name</h2>
-                    <h3><i class="fa-solid fa-user-graduate"></i> Intern</h3>
-                    </div>
-                    <div class="card-body bg-light py-3">
-                        <p class="bg-body border p-2 mb-0">ID: enter ID</p>
-                        <p class="bg-body border border-top-0 border-bottom-0 p-2 mb-0">Email: <a href="mailto:fake@email.com">fake@email.com</a></p>
-                        <p class="bg-body border p-2 my-0">School: 1</p>
-                    </div>
-                </div>
-            </div>
+        ${employeeCards}
 
         </div>
     </div>
 </body>
-</html>`; //CREATES HTML DOCUMENT -> use team cards
+</html>`;
     fs.writeFile(`teamPage.html`, fileText, (err) => {
         if (err) {
             console.error(err);
@@ -144,6 +107,62 @@ function createIntern (data) {
     // return object created
 }
 
+function createEmployeeCard (employee) {
+    let string;
+    if(employee.getRole() == 'Manager') {
+        string = `<div class="col-md-6 col-lg-4 px-3">
+<div class="card mb-3 shadow">
+    <div class="card-header bg-primary text-white">
+    <h2>${employee.getName()}</h2>
+    <h3><i class="fa-solid fa-mug-hot"></i> Manager</h3>
+    </div>
+    <div class="card-body bg-light py-3">
+        <p class="bg-body border p-2 mb-0">ID: ${employee.getId()}</p>
+        <p class="bg-body border border-top-0 border-bottom-0 p-2 mb-0">Email: <a href="mailto:${employee.getEmail()}">${employee.getEmail()}</a></p>
+        <p class="bg-body border p-2 my-0">Office number: ${employee.officeNumber}</p>
+    </div>
+</div>
+</div>
+`
+    } else if (employee.getRole() == 'Engineer') {
+        string =
+`
+<div class="col-md-6 col-lg-4 px-3">
+    <div class="card mb-3 shadow">
+    <div class="card-header bg-primary text-white">
+    <h2>${employee.getName()}</h2>
+    <h3><i class="fa-solid fa-glasses"></i> Engineer</h3>
+    </div>
+    <div class="card-body bg-light py-3">
+        <p class="bg-body border p-2 mb-0">ID: ${employee.getId()}</p>
+        <p class="bg-body border border-top-0 border-bottom-0 p-2 mb-0">Email: <a href="mailto:${employee.getEmail()}">${employee.getEmail()}</a></p>
+        <p class="bg-body border p-2 my-0">Github: <a href="https://github.com/${employee.getGithub()}">${employee.getGithub()}</a></p>
+    </div>
+</div>
+</div>
+`
+
+    } else if (employee.getRole() == 'Intern') {
+        string =
+`
+<div class="col-md-6 col-lg-4 px-3">
+    <div class="card mb-3 shadow">
+    <div class="card-header bg-primary text-white">
+    <h2>${employee.getName()}</h2>
+    <h3><i class="fa-solid fa-glasses"></i> Engineer</h3>
+    </div>
+    <div class="card-body bg-light py-3">
+        <p class="bg-body border p-2 mb-0">ID: ${employee.getId()}</p>
+        <p class="bg-body border border-top-0 border-bottom-0 p-2 mb-0">Email: <a href="mailto:${employee.getEmail()}">${employee.getEmail()}</a></p>
+        <p class="bg-body border p-2 my-0">School: ${employee.getSchool()}</p>
+    </div>
+</div>
+</div>
+`
+    }
+    return string;
+}
+
 async function init() {
     const team = [];
     team.push(createManager(await inquirer.prompt(managerQuestions)));
@@ -162,3 +181,4 @@ async function init() {
 }
 
 init();
+
