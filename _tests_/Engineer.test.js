@@ -1,8 +1,8 @@
-const Engineer = require('../src/Engineer');
+const Engineer = require('../lib/Engineer');
 
 describe('Engineer', () => {
     describe('Initialization', () => {
-        it('Should create an object with a name, id, email, and attached', () => {
+        it('Should create an object with a name, id, email, and github', () => {
             const engineer = new Engineer('Jake', '3242', 'fake@email.com', 'carmart7')
     
             expect(engineer.name).toEqual('Jake');

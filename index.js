@@ -1,9 +1,8 @@
-const Manager = require('./src/Manager');
-const Engineer = require('./src/Engineer');
-const Intern = require('./src/Intern');
+const Manager = require('./lib/Manager');
+const Engineer = require('./lib/Engineer');
+const Intern = require('./lib/Intern');
 const inquirer = require('inquirer');
 const fs = require('fs');
-const { createDecipheriv } = require('crypto');
 
 // ask user for information on the manager
     // name
@@ -80,7 +79,7 @@ function writeTeamPage(team) {
     </div>
 </body>
 </html>`;
-    fs.writeFile(`teamPage.html`, fileText, (err) => {
+    fs.writeFile(`./dist/teamPage.html`, fileText, (err) => {
         if (err) {
             console.error(err);
         } else {
