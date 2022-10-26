@@ -6,6 +6,9 @@ This command line application allows the user to create a high quality team prof
 
 
 
+https://user-images.githubusercontent.com/50060256/197904711-a4a8d71d-225d-445b-8f5f-fdb4b0f82428.mp4
+
+
 Inquirer is used to get text input from the user via the command line as shown below.
 
 ![Image of text input](./assets/images/Code_Eyg0h75g5i.png)
